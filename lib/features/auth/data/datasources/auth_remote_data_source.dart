@@ -47,6 +47,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       debugPrint('RESPONSE_USER : ${response.user}');
 
       return UserModel.fromJson(response.user!.toJson());
+    } on AuthException catch (e) {
+      debugPrint('AUTH_EXEPTION : $e\n');
+
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -84,6 +88,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       // debugPrint(
       //     'JSON_CONVERTED : ${UserModel.fromJson(response.user!.toJson()).copyWith( email: currentUserSession!.user.email ?? '')}\n');
       return UserModel.fromJson(response.user!.toJson());
+    } on AuthException catch (e) {
+      debugPrint('AUTH_EXEPTION : $e\n');
+
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
